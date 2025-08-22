@@ -1,0 +1,319 @@
+/* Base styling */
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #f5f5f5;
+  scroll-behavior: smooth;
+  position: relative;
+  min-height: 100vh;
+
+  /* Background image */
+  background: url("images/bg.jpg") no-repeat center center fixed;
+  background-size: cover;
+}
+
+/* Dark overlay */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; 
+  left: 0; 
+  right: 0; 
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);  /* adjust opacity for darkness */
+  z-index: -1;  /* keep behind content */
+}
+
+/* Navbar */
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: transparent;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: grid;
+  grid-template-columns: 1fr auto 1fr; /* 3 columns: left, center, right */
+  align-items: center;
+  padding: 4px 15px;
+  z-index: 1000;
+  height: 40px;
+  transition: backdrop-filter 0.3s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Title (always left) */
+header h1 {
+  grid-column: 1;          /* left column */
+  justify-self: start;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 33px;
+  font-weight: 900;
+  font-style: italic;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 0;
+  line-height: 40px;
+}
+
+/* Navigation */
+nav {
+  display: flex;
+  gap: 1.5rem;
+}
+
+/* Links with pill shape */
+nav a {
+  text-decoration: none;
+  font-size: 15px;
+  color: #ffffff;
+  padding: 6px 14px;
+  border-radius: 20px; /* pill/circle effect */
+  background: rgba(255, 255, 255, 0.1); /* transparent but visible */
+  transition: background 0.3s, color 0.3s;
+}
+
+nav a:hover {
+  background: rgba(255, 255, 255, 0.2); /* brighter on hover */
+  color: #ffd700;
+}
+
+/* Active page indicator */
+nav a.active {
+  border-top: 2px solid #ffffff; /* white line above */
+  background: rgba(255, 255, 255, 0.15); /* slightly stronger background */
+}
+
+
+
+/* Placeholder (right column) keeps nav perfectly centered */
+header::after {
+  content: "";
+  flex: 1;
+}
+
+/* Sections */
+section {
+  min-height: 100vh;
+  padding: 90px 20px 50px;
+  text-align: center;
+}
+
+section h2 {
+  font-size: 28px; /* smaller for better fit on small screens */
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+section p {
+  max-width: 700px;
+  margin: auto;
+  line-height: 1.6;
+  color: #eaeaea;
+  font-size: 16px;
+}
+
+/* Fix content hiding under navbar */
+#about, #projects, #education, #info {
+  padding-top: 110px;
+}
+
+/* About container layout: left text, right gallery */
+/* Container: left text, right gallery */
+.about-container {
+  display: flex;
+  align-items: center; /* vertical alignment of gallery */
+  justify-content: space-between;
+  gap: 40px;
+  max-width: 1000px;
+  margin: auto;
+  padding: 15px 20px; /* reduced top padding to move content higher */
+  flex-wrap: wrap;
+}
+
+
+/* Left text */
+.about-text {
+  flex: 1;
+  min-width: 300px;
+  color: #eaeaea;
+  text-align: left;
+}
+
+
+/* Sub-title */
+.sub-title {
+  font-size: 16px;
+  color: gray;
+  margin-bottom: -5px; /* was 10px, make it smaller */
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* Main title */
+.main-title {
+  font-size: 32px; /* bigger */
+  line-height: 1.2; /* normal spacing */
+  margin-bottom: -68px;
+}
+
+/* Highlight: Creative developer */
+.highlight {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: 80px;
+  background: linear-gradient(90deg, #ff6b6b, #f7d794, #6a89cc, #78e08f);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientShift 4s ease infinite;
+  margin-bottom: 1px;
+  line-height: 1; /* was tighter before, make it normal so not too far */
+}
+
+.highlight .tabbed {
+  display: inline-block;
+  margin-left: 40px; /* keep indentation */
+}
+
+
+/* Paragraphs */
+.about-description {
+  font-size: 18px; /* bigger */
+  line-height: 2; /* double spacing only for paragraphs */
+  margin-bottom: 15px;
+  color: #eaeaea;
+}
+
+
+/* Gradient animation */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Right gallery */
+.about-gallery {
+  flex: 1;
+  min-width: 300px;
+  max-width: 400px;
+  height: 540px; /* taller rectangle */
+  position: relative;
+  perspective: 1000px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* vertically center slides */
+  margin-left: 20px; /* move gallery slightly to the right */
+}
+
+.gallery-window {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  border-radius: 20px;
+  overflow: visible; /* allow slight peek */
+}
+
+/* Slides */
+.gallery-slide {
+  position: absolute;
+  top: 0;
+  width: 90%;        /* slightly smaller than full width */
+  height: 100%;      /* full height of gallery (taller) */
+  object-fit: cover;
+  border-radius: 20px;
+  transition: transform 1s ease, opacity 1s ease;
+  z-index: 1;
+  opacity: 0;
+  left: 5%;          /* center active slide */
+}
+
+/* Active slide */
+.gallery-slide.active {
+  transform: translateX(0) scale(1) rotateY(0deg);
+  opacity: 1;
+  z-index: 10;
+}
+
+/* Previous slide */
+.gallery-slide.prev {
+  transform: translateX(-10%) scale(0.9) rotateY(2deg); /* subtle peek */
+  opacity: 0.7;
+  z-index: 5;
+}
+
+/* Next slide */
+.gallery-slide.next {
+  transform: translateX(10%) scale(0.9) rotateY(-2deg); /* subtle peek */
+  opacity: 0.7;
+  z-index: 5;
+}
+
+/* Caption */
+.gallery-caption {
+  text-align: center;
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: 18px;
+  color: #ffd700;
+  position: relative;
+  z-index: 20; /* stays above slides */
+}
+
+
+.social-icons {
+  display: flex;
+  gap: 20px;
+  justify-content: flex-start;
+  margin-top: auto; /* push to bottom of the text block */
+}
+
+.social-icons a img {
+  width: 40px;
+  height: 40px;
+  transition: transform 0.3s, filter 0.3s;
+}
+
+.social-icons a:hover img {
+  transform: scale(1.2);
+  filter: brightness(1.3);
+}
+
+
+
+/* Experience Section */
+.experience-section {
+  text-align: center;
+  margin-top: 50px; /* space from intro */
+  padding: 40px 20px;
+}
+
+.experience-subtitle {
+  font-size: 20px;
+  color: gray;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: -35px;
+}
+
+.experience-title {
+  font-size: 40px; /* bigger */
+  font-weight: 700;
+  color: #eaeaea;
+  line-height: 1.2; /* closer spacing between lines */
+}
+
+.experience-highlight {
+  display: block; /* forces it to its own line */
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: 60px; /* slightly bigger than top line */
+  background: linear-gradient(90deg, #ff6b6b, #f7d794, #6a89cc, #78e08f);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientShift 4s ease infinite;
+}
+
