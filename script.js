@@ -77,3 +77,6 @@ window.addEventListener('scroll', () => {
   // Fill line behind ball
   fill.style.height = `${ballY + ball.offsetHeight/2}px`;
 });
+
+
+// project games carousel

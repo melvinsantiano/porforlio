@@ -31,11 +31,168 @@
 
 <!-- 🎮 Games Section -->
 <section id="games">
-  <h2>Games</h2>
+  <h2 class="highlight">Games</h2>
+
+  <!-- HTML -->
+<div class="carousel" id="games-carousel">
+  <div class="carousel-track">
+      <div class="game-card">
+        <a href="https://example.com/game1" target="_blank">
+          <img src="images/game1.jpg" alt="Game 1">
+          <span class="game-title">NO GAME</span>
+        </a>
+      </div>
+
+      <div class="game-card">
+        <a href="#">
+          <img src="images/game2.jpg" alt="Game 2">
+          <span class="game-title">NO GAME</span>
+        </a>
+      </div>
+
+      <div class="game-card">
+        <a href="https://example.com/game3" target="_blank">
+          <img src="images/game3.jpg" alt="Game 3">
+          <span class="game-title">NO GAME</span>
+        </a>
+      </div>
+
+      <!-- Replace your current game cards with this structure -->
+      <div class="game-card">
+        <a href="https://example.com/game1" target="_blank">
+          <img src="images/game1.jpg" alt="Game 4">
+          <span class="game-title">NO GAME</span>
+        </a>
+      </div>
+
+      <div class="game-card">
+        <a href="#">
+          <img src="images/game2.jpg" alt="Game 5">
+          <span class="game-title">NO GAME</span>
+        </a>
+      </div>
+
+      <div class="game-card">
+        <a href="https://example.com/game3" target="_blank">
+          <img src="images/game3.jpg" alt="Game 6">
+          <span class="game-title">NO GAME</span>
+        </a>
+      </div>
+
+  </div>
+</div>
+
+
+<script>
+  // ===== Config =====
+  const SPEED = 0.6; // pixels per frame (autoscroll speed)
+  const GAP = 20;    // must match CSS .carousel-track gap
+
+  // ===== Setup =====
+  const container = document.getElementById('games-carousel');
+  const track = container.querySelector('.carousel-track');
+
+  // Clone one full set of cards to enable seamless looping
+  const originals = Array.from(track.children);
+  const frag = document.createDocumentFragment();
+  originals.forEach(node => frag.appendChild(node.cloneNode(true)));
+  track.appendChild(frag);
+
+  // Measure width of one set (originals only)
+  function measureSetWidth() {
+    // Sum widths of originals + total gaps between them
+    const widths = originals.map(el => el.getBoundingClientRect().width);
+    const totalCardWidth = widths.reduce((a, b) => a + b, 0);
+    const totalGaps = GAP * Math.max(0, originals.length - 1);
+    return totalCardWidth + totalGaps;
+  }
+
+  let setWidth = 0;
+  let pos = 0;            // current translateX
+  let rafId = null;
+  let dragging = false;
+  let dragStartX = 0;
+  let dragStartPos = 0;
+  let paused = false;
+
+  // Normalize position into (-setWidth, 0]
+  function wrapPosition() {
+    if (setWidth <= 0) return;
+    while (pos <= -setWidth) pos += setWidth;
+    while (pos > 0) pos -= setWidth;
+  }
+
+  function render() {
+    track.style.transform = `translate3d(${pos}px, 0, 0)`;
+  }
+
+  function frame() {
+    if (!paused && !dragging) {
+      pos -= SPEED;
+      wrapPosition();
+      render();
+    }
+    rafId = requestAnimationFrame(frame);
+  }
+
+  function start() {
+    if (!rafId) rafId = requestAnimationFrame(frame);
+  }
+  function stop() {
+    if (rafId) cancelAnimationFrame(rafId);
+    rafId = null;
+  }
+
+  // Hover pause/resume
+  container.addEventListener('mouseenter', () => { paused = true; });
+  container.addEventListener('mouseleave', () => { paused = false; });
+
+  // Pointer (mouse/touch) drag
+  container.addEventListener('pointerdown', (e) => {
+    dragging = true;
+    paused = true; // pause while dragging
+    dragStartX = e.clientX;
+    dragStartPos = pos;
+    container.setPointerCapture(e.pointerId);
+  });
+
+  container.addEventListener('pointermove', (e) => {
+    if (!dragging) return;
+    const delta = e.clientX - dragStartX;
+    pos = dragStartPos + delta;
+    wrapPosition();
+    render();
+  });
+
+  function endDrag() {
+    if (!dragging) return;
+    dragging = false;
+    paused = false;
+  }
+
+  container.addEventListener('pointerup', endDrag);
+  container.addEventListener('pointercancel', endDrag);
+  // Safety: if pointer leaves the element mid-drag
+  container.addEventListener('mouseleave', () => { if (dragging) endDrag(); });
+
+  // Recompute on load & on resize (fonts/layout changes)
+  function init() {
+    setWidth = measureSetWidth();
+    wrapPosition();
+    render();
+    start();
+  }
+  window.addEventListener('load', init);
+  window.addEventListener('resize', () => {
+    setWidth = measureSetWidth();
+    wrapPosition();
+    render();
+  });
+</script>
 </section>
 
-
-
-  <script src="script.js"></script>
+  
 </body>
+
+<script src="script.js" defer></script>
 </html>

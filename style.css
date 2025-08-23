@@ -535,3 +535,74 @@ section p {
   transform: scale(1.1);
   box-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
 }
+
+
+  /* Container */
+  .carousel {
+    max-width: 1280px;
+    width: 100%;
+    margin: 50px auto;
+    overflow: hidden;
+    position: relative;
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  .carousel:active { cursor: grabbing; }
+
+  /* Track */
+  .carousel-track {
+    display: flex;
+    gap: 20px;              /* <-- keep in sync with JS GAP if you change */
+    will-change: transform;
+    transform: translate3d(0,0,0);
+    /* IMPORTANT: no transition — animation handled in JS for smooth loop */
+  }
+
+  /* Cards (your styles, kept) */
+  .game-card {
+    flex: 0 0 300px;        /* fixed width card */
+    height: 300px;
+    background: #1e1e2f;
+    border: 2px solid #6a89cc;
+    border-radius: 12px;
+    padding: 20px;
+    color: #fff;
+    text-align: center;
+    box-shadow: 0 0 15px #6a89cc;
+    animation: glowGradient 6s ease-in-out infinite;
+    transition: transform 0.3s;
+  }
+
+  @keyframes glowGradient {
+    0%   { box-shadow: 0 0 15px #ff6b6b, 0 0 30px #f7d794; border-color: #ff6b6b; }
+    25%  { box-shadow: 0 0 15px #f7d794, 0 0 30px #6a89cc; border-color: #f7d794; }
+    50%  { box-shadow: 0 0 15px #6a89cc, 0 0 30px #78e08f; border-color: #6a89cc; }
+    75%  { box-shadow: 0 0 15px #78e08f, 0 0 30px #ff6b6b; border-color: #78e08f; }
+    100% { box-shadow: 0 0 15px #ff6b6b, 0 0 30px #f7d794; border-color: #ff6b6b; }
+  }
+
+.game-card a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-decoration: none;
+  color: #fff;
+  height: 100%;
+  width: 100%;
+}
+
+.game-card img {
+  width: 100%;
+  height: 80%;
+  object-fit: cover;   /* ensures it fills without stretching */
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.game-title {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+}
