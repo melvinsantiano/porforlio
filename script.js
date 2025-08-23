@@ -54,3 +54,26 @@ setInterval(() => {
   current = (current + 1) % slides.length;
   updateSlides();
 }, 3000);
+
+
+const ball = document.querySelector('.timeline-ball');
+const fill = document.querySelector('.timeline-fill');
+const timeline = document.querySelector('.timeline');
+
+window.addEventListener('scroll', () => {
+  const timelineTop = timeline.offsetTop;
+  const timelineHeight = timeline.offsetHeight;
+  const scrollTop = window.scrollY;
+  const windowHeight = window.innerHeight;
+
+  // Progress 0 - 1
+  let progress = (scrollTop + windowHeight/2 - timelineTop) / timelineHeight;
+  progress = Math.min(Math.max(progress, 0), 1);
+
+  // Move ball
+  const ballY = progress * timelineHeight;
+  ball.style.top = `${ballY}px`;
+
+  // Fill line behind ball
+  fill.style.height = `${ballY + ball.offsetHeight/2}px`;
+});
