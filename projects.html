@@ -28,8 +28,8 @@
 <section id="websites">
   <h2 class="highlight">Websites</h2>
 
-  <div id="sites-carousel" class="carousel">
-  <div class="carousel-track">
+  <div id="sites-carousel" class="websites-carousel">
+    <div class="carousel-track">
 
       <div class="card">
         <a href="https://melvinsantiano.github.io/porforlio/about.html" target="_blank">
@@ -40,20 +40,21 @@
 
       <div class="card">
         <a href="#">
-          <img src="images/placeholder.jpg" alt="No Website">
+          <img src="images/Projects/comingsoon.jpg" alt="No Website">
           <span class="sites-title">NO WEBSITE</span>
         </a>
       </div>
+
       <div class="card">
         <a href="https://example.com/site2" target="_blank">
-          <img src="images/site2.jpg" alt="No Website">
+          <img src="images/Projects/comingsoon.jpg" alt="No Website">
           <span class="sites-title">NO WEBSITE</span>
         </a>
       </div>
 
       <div class="card">
         <a href="https://example.com/site1" target="_blank">
-          <img src="images/site1.jpg" alt="No Website">
+          <img src="images/Projects/comingsoon.jpg" alt="No Website">
           <span class="sites-title">NO WEBSITE</span>
         </a>
       </div>
@@ -61,126 +62,127 @@
     </div>
   </div>
 
-    <script>
-const SPEED2 = 0.3;
-const GAP2 = 20;
+  <script>
+    const SPEED2 = 0.3;
+    const GAP2 = 20;
 
-const container2 = document.getElementById('sites-carousel');
-const track2 = container2.querySelector('.carousel-track');
+    const container2 = document.getElementById('sites-carousel');
+    const track2 = container2.querySelector('.carousel-track');
 
-const originals2 = Array.from(track2.children);
-const frag2 = document.createDocumentFragment();
-originals2.forEach(node => frag2.appendChild(node.cloneNode(true)));
-track2.appendChild(frag2);
+    const originals2 = Array.from(track2.children);
+    const frag2 = document.createDocumentFragment();
+    originals2.forEach(node => frag2.appendChild(node.cloneNode(true)));
+    track2.appendChild(frag2);
 
-function measureSetWidth2() {
-  const widths = originals2.map(el => el.getBoundingClientRect().width);
-  const totalCardWidth = widths.reduce((a, b) => a + b, 0);
-  const totalGaps = GAP2 * Math.max(0, originals2.length - 1);
-  return totalCardWidth + totalGaps;
-}
+    function measureSetWidth2() {
+      const widths = originals2.map(el => el.getBoundingClientRect().width);
+      const totalCardWidth = widths.reduce((a, b) => a + b, 0);
+      const totalGaps = GAP2 * Math.max(0, originals2.length - 1);
+      return totalCardWidth + totalGaps;
+    }
 
-let setWidth2 = 0;
-let pos2 = 0;
-let rafId2 = null;
-let dragging2 = false;
-let dragStartX2 = 0;
-let dragStartPos2 = 0;
-let paused2 = false;
-let dragMoved2 = false;
+    let setWidth2 = 0;
+    let pos2 = 0;
+    let rafId2 = null;
+    let dragging2 = false;
+    let dragStartX2 = 0;
+    let dragStartPos2 = 0;
+    let paused2 = false;
+    let dragMoved2 = false;
 
-function wrapPosition2() {
-  if (setWidth2 <= 0) return;
-  while (pos2 <= -setWidth2) pos2 += setWidth2;
-  while (pos2 > 0) pos2 -= setWidth2;
-}
+    function wrapPosition2() {
+      if (setWidth2 <= 0) return;
+      while (pos2 <= -setWidth2) pos2 += setWidth2;
+      while (pos2 > 0) pos2 -= setWidth2;
+    }
 
-function render2() {
-  track2.style.transform = `translate3d(${pos2}px, 0, 0)`;
-}
+    function render2() {
+      track2.style.transform = `translate3d(${pos2}px, 0, 0)`;
+    }
 
-function frame2() {
-  if (!paused2 && !dragging2) {
-    pos2 += SPEED2; // slide to the RIGHT
-    wrapPosition2();
-    render2();
-  }
-  rafId2 = requestAnimationFrame(frame2);
-}
+    function frame2() {
+      if (!paused2 && !dragging2) {
+        pos2 += SPEED2; // slide to the RIGHT
+        wrapPosition2();
+        render2();
+      }
+      rafId2 = requestAnimationFrame(frame2);
+    }
 
-function start2() {
-  if (!rafId2) rafId2 = requestAnimationFrame(frame2);
-}
+    function start2() {
+      if (!rafId2) rafId2 = requestAnimationFrame(frame2);
+    }
 
-// Pause on hover
-container2.addEventListener('mouseenter', () => { paused2 = true; });
-container2.addEventListener('mouseleave', () => { paused2 = false; });
+    // Pause on hover
+    container2.addEventListener('mouseenter', () => { paused2 = true; });
+    container2.addEventListener('mouseleave', () => { paused2 = false; });
 
-// Start drag
-container2.addEventListener('pointerdown', (e) => {
-  const anchor = e.target.closest('a');
-  if (anchor) {
-    // If it's a real link, do NOT hijack it
-    downAnchor2 = null;
-    return;
-  }
+    // Start drag
+    container2.addEventListener('pointerdown', (e) => {
+      const anchor = e.target.closest('a');
+      if (anchor) return;
 
-  dragging2 = true;
-  paused2 = true;
-  dragStartX2 = e.clientX;
-  dragStartPos2 = pos2;
-  dragMoved2 = false;
-  downAnchor2 = null;
-  container2.setPointerCapture(e.pointerId);
-});
+      dragging2 = true;
+      paused2 = true;
+      dragStartX2 = e.clientX;
+      dragStartPos2 = pos2;
+      dragMoved2 = false;
+      container2.setPointerCapture(e.pointerId);
+    });
 
-// End drag
-function endDrag2(e) {
-  if (!dragging2) return;
-  dragging2 = false;
-  paused2 = false;
-  container2.releasePointerCapture?.(e.pointerId);
+    // Handle dragging
+    container2.addEventListener('pointermove', (e) => {
+      if (!dragging2) return;
+      const dx = e.clientX - dragStartX2;
+      pos2 = dragStartPos2 + dx;
+      dragMoved2 = Math.abs(dx) > 5;
+      render2();
+    });
 
-  if (dragMoved2) {
-    // If it was a drag → block accidental clicks
-    const cancelOnce = (ev) => {
-      ev.preventDefault();
-      ev.stopPropagation();
-      container2.removeEventListener('click', cancelOnce, true);
-    };
-    container2.addEventListener('click', cancelOnce, true);
-  }
-}
+    // End drag
+    function endDrag2(e) {
+      if (!dragging2) return;
+      dragging2 = false;
+      paused2 = false;
+      container2.releasePointerCapture?.(e.pointerId);
 
-container2.addEventListener('pointerup', endDrag2);
-container2.addEventListener('pointercancel', endDrag2);
-container2.addEventListener('mouseleave', (e) => { if (dragging2) endDrag2(e); });
+      if (dragMoved2) {
+        const cancelOnce = (ev) => {
+          ev.preventDefault();
+          ev.stopPropagation();
+          container2.removeEventListener('click', cancelOnce, true);
+        };
+        container2.addEventListener('click', cancelOnce, true);
+      }
+    }
 
-// Init / resize
-function init2() {
-  setWidth2 = measureSetWidth2();
-  wrapPosition2();
-  render2();
-  start2();
-}
-window.addEventListener('load', init2);
-window.addEventListener('resize', () => {
-  setWidth2 = measureSetWidth2();
-  wrapPosition2();
-  render2();
-});
-</script>
+    container2.addEventListener('pointerup', endDrag2);
+    container2.addEventListener('pointercancel', endDrag2);
+    container2.addEventListener('mouseleave', (e) => { if (dragging2) endDrag2(e); });
 
+    function init2() {
+      setWidth2 = measureSetWidth2();
+      wrapPosition2();
+      render2();
+      start2();
+    }
+    window.addEventListener('load', init2);
+    window.addEventListener('resize', () => {
+      setWidth2 = measureSetWidth2();
+      wrapPosition2();
+      render2();
+    });
+  </script>
 </section>
+
 
 
 <!-- 🎮 Games Section -->
 <section id="games">
   <h2 class="highlight">Games</h2>
 
-  <!-- HTML -->
-<div class="carousel" id="games-carousel">
-  <div class="carousel-track">
+  <div class="games-carousel" id="games-carousel">
+    <div class="carousel-track">
 
       <div class="card">
         <a href="https://melvinsantiano.github.io/space-impact/" target="_blank">
@@ -191,41 +193,39 @@ window.addEventListener('resize', () => {
 
       <div class="card">
         <a href="#">
-          <img src="images/game2.jpg" alt="Game 2">
+          <img src="images/Projects/comingsoon.jpg" alt="Game 2">
           <span class="sites-title">NO GAME</span>
         </a>
       </div>
 
       <div class="card">
         <a href="https://example.com/game3" target="_blank">
-          <img src="images/game3.jpg" alt="Game 3">
+          <img src="images/Projects/comingsoon.jpg" alt="Game 3">
           <span class="sites-title">NO GAME</span>
         </a>
       </div>
 
-      <!-- Replace your current game cards with this structure -->
       <div class="card">
         <a href="https://example.com/game1" target="_blank">
-          <img src="images/game1.jpg" alt="Game 4">
+          <img src="images/Projects/comingsoon.jpg" alt="Game 4">
           <span class="sites-title">NO GAME</span>
         </a>
       </div>
 
       <div class="card">
         <a href="#">
-          <img src="images/game2.jpg" alt="Game 5">
-          <span class="sites0title">NO GAME</span>
+          <img src="images/Projects/comingsoon.jpg" alt="Game 5">
+          <span class="sites-title">NO GAME</span>
         </a>
       </div>
 
+    </div>
   </div>
-</div>
-
 
 <script>
   // ===== Config =====
-  const SPEED = 0.6; // pixels per frame (autoscroll speed)
-  const GAP = 20;    // must match CSS .carousel-track gap
+  const SPEED = 0.6; 
+  const GAP = 20;   
 
   // ===== Setup =====
   const container = document.getElementById('games-carousel');
@@ -237,9 +237,7 @@ window.addEventListener('resize', () => {
   originals.forEach(node => frag.appendChild(node.cloneNode(true)));
   track.appendChild(frag);
 
-  // Measure width of one set (originals only)
   function measureSetWidth() {
-    // Sum widths of originals + total gaps between them
     const widths = originals.map(el => el.getBoundingClientRect().width);
     const totalCardWidth = widths.reduce((a, b) => a + b, 0);
     const totalGaps = GAP * Math.max(0, originals.length - 1);
@@ -247,14 +245,14 @@ window.addEventListener('resize', () => {
   }
 
   let setWidth = 0;
-  let pos = 0;            // current translateX
+  let pos = 0;
   let rafId = null;
   let dragging = false;
   let dragStartX = 0;
   let dragStartPos = 0;
   let paused = false;
+  let dragMoved = false;
 
-  // Normalize position into (-setWidth, 0]
   function wrapPosition() {
     if (setWidth <= 0) return;
     while (pos <= -setWidth) pos += setWidth;
@@ -267,7 +265,7 @@ window.addEventListener('resize', () => {
 
   function frame() {
     if (!paused && !dragging) {
-      pos -= SPEED;
+      pos -= SPEED; // slide LEFT
       wrapPosition();
       render();
     }
@@ -277,58 +275,55 @@ window.addEventListener('resize', () => {
   function start() {
     if (!rafId) rafId = requestAnimationFrame(frame);
   }
-  function stop() {
-    if (rafId) cancelAnimationFrame(rafId);
-    rafId = null;
-  }
 
   // Hover pause/resume
   container.addEventListener('mouseenter', () => { paused = true; });
   container.addEventListener('mouseleave', () => { paused = false; });
 
-  // Pointer (mouse/touch) drag
   // Start drag
-container.addEventListener('pointerdown', (e) => {
-  const anchor = e.target.closest('a');
-  if (anchor) {
-    // If it's a real link, let the browser handle it
-    downAnchor = null;
-    return;
+  container.addEventListener('pointerdown', (e) => {
+    const anchor = e.target.closest('a');
+    if (anchor) return;
+
+    dragging = true;
+    paused = true;
+    dragStartX = e.clientX;
+    dragStartPos = pos;
+    dragMoved = false;
+    container.setPointerCapture(e.pointerId);
+  });
+
+  // Handle dragging
+  container.addEventListener('pointermove', (e) => {
+    if (!dragging) return;
+    const dx = e.clientX - dragStartX;
+    pos = dragStartPos + dx;
+    dragMoved = Math.abs(dx) > 5;
+    render();
+  });
+
+  // End drag
+  function endDrag(e) {
+    if (!dragging) return;
+    dragging = false;
+    paused = false;
+    container.releasePointerCapture?.(e.pointerId);
+
+    if (dragMoved) {
+      const cancelOnce = (ev) => {
+        ev.preventDefault();
+        ev.stopPropagation();
+        container.removeEventListener('click', cancelOnce, true);
+      };
+      container.addEventListener('click', cancelOnce, true);
+    }
   }
-
-  dragging = true;
-  paused = true;
-  dragStartX = e.clientX;
-  dragStartPos = pos;
-  dragMoved = false;
-  downAnchor = null;
-  container.setPointerCapture(e.pointerId);
-});
-
-// End drag
-function endDrag(e) {
-  if (!dragging) return;
-  dragging = false;
-  paused = false;
-  container.releasePointerCapture?.(e.pointerId);
-
-  if (dragMoved) {
-    const cancelOnce = (ev) => {
-      ev.preventDefault();
-      ev.stopPropagation();
-      container.removeEventListener('click', cancelOnce, true);
-    };
-    container.addEventListener('click', cancelOnce, true);
-  }
-}
-
 
   container.addEventListener('pointerup', endDrag);
   container.addEventListener('pointercancel', endDrag);
-  // Safety: if pointer leaves the element mid-drag
-  container.addEventListener('mouseleave', () => { if (dragging) endDrag(); });
+  container.addEventListener('mouseleave', (e) => { if (dragging) endDrag(e); });
 
-  // Recompute on load & on resize (fonts/layout changes)
+  // Init
   function init() {
     setWidth = measureSetWidth();
     wrapPosition();
@@ -344,8 +339,175 @@ function endDrag(e) {
 </script>
 </section>
 
-  
-</body>
+
+<footer class="site-footer" role="contentinfo" aria-label="Site footer">
+  <div class="footer-card" role="region" aria-label="Footer information">
+    <div class="footer-grid">
+      <!-- Left: brand + tagline -->
+      <div class="footer-brand">
+        <a class="footer-logo" href="index.html">SANTIANO</a>
+        <p class="footer-tagline">
+          A collection of projects and notes. Welcome — feel free to reach out via email.
+        </p>
+      </div>
+
+      <!-- General links -->
+      <nav class="footer-col">
+        <h4>General</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="education.html">Education</a></li>
+        </ul>
+      </nav>
+
+      <!-- More -->
+      <div class="footer-col">
+        <h4>More</h4>
+        <ul>
+          <li><a href="mailto:santianomelvin21@gmail.com">Email Me</a></li>
+          <li><a href="https://aayushbharti.in/blog" target="_blank">My Inspiration</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="footer-bottom">
+      <div class="left">
+        <span>© <span id="year"></span> Santiano. All rights reserved.</span>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms &amp; Conditions</a>
+      </div>
+
+      <div class="right">
+        <a href="https://github.com/melvinsantiano" target="_blank" aria-label="GitHub">
+          <img src="images/icons/githubs.png" alt="GitHub" class="footer-icon">
+        </a>
+        <a href="https://www.facebook.com/" target="_blank" aria-label="Facebook">
+          <img src="images/icons/facebook.png" alt="Facebook" class="footer-icon">
+        </a>
+      </div>
+    </div>
+
+  </div>
+</footer>
+<style>
+    :root{
+          --page-bg: #0d1923;  
+          --card-bg: #0d1923;  
+          --muted: #cccccc;    
+          --accent: #ffffff;   
+          --max-width: 1200px;
+        }
+        .site-footer {
+          max-width: var(--max-width);
+          margin: 0 auto;
+          padding: 30px 30px;
+          background: var(--card-bg);
+          margin-bottom: 40px;
+        }
+
+        .footer-card{
+          background: none;  
+          padding: 0;
+        }
+
+        .footer-grid{
+          display:grid;
+          grid-template-columns: 1fr repeat(2, minmax(160px,220px));
+          gap: 36px;
+          align-items:start;
+        }
+
+        .footer-brand{
+          display:flex;
+          flex-direction:column;
+          gap:14px;
+        }
+        .footer-logo {
+          text-decoration:none;
+          font-weight:700;
+          font-size:20px;
+          letter-spacing:3px;
+          text-transform:uppercase;
+          color: var(--accent);
+        }
+        .footer-tagline{
+          color:var(--muted);
+          font-size:14px;
+          line-height:1.5;
+          max-width: 420px;
+        }
+        .footer-col h4{
+          margin:0 0 16px 0;
+          font-size:16px;
+          font-weight:600;
+          color: var(--accent);
+        }
+        .footer-col ul{
+          list-style:none;
+          padding:0;
+          margin:0;
+          display:flex;
+          flex-direction:column;
+          gap:14px;
+        }
+        .footer-col a{
+          color:var(--muted);
+          text-decoration:none;
+          font-size:14px;
+          transition: color .18s, transform .12s;
+        }
+        .footer-col a:hover{
+          color:var(--accent);
+          transform: translateX(3px);
+        }
+        .footer-bottom{
+          display:flex;
+          align-items:center;
+          justify-content:space-between;
+          gap:16px;
+          margin-top:22px;
+          border-top: 1px solid rgba(255,255,255,0.1);
+          padding-top:18px;
+          color:var(--muted);
+          font-size:13px;
+        }
+        .footer-bottom .left{
+          display:flex;
+          gap:18px;
+          align-items:center;
+        }
+        .footer-bottom a{
+          color:var(--muted);
+          text-decoration:none;
+          font-size:13px;
+        }
+        .footer-bottom a:hover{
+          color:var(--accent);
+        }
+        .footer-bottom .right a {
+          margin-left: 15px;
+        }
+        .footer-bottom .footer-icon {
+          width: 22px; 
+          height: 22px;  
+          object-fit: contain;
+          transition: opacity 0.3s, transform 0.2s;
+        }
+        .footer-bottom .footer-icon:hover {
+          opacity: 0.7;
+          transform: scale(1.1);
+        }
+</style>
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
 
 <script src="script.js" defer></script>
+
+
+</body>
 </html>

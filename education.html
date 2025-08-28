@@ -7,7 +7,6 @@
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,900&display=swap" rel="stylesheet">
 </head>
-<body>
 
   <!-- Navbar -->
   <header>
@@ -32,8 +31,175 @@
       (Example: Bachelor of Science in Computer Science – University Name)
     </p>
   </section>
-
-  <script src="script.js"></script>
   
+  <script src="script.js"></script>
+
+
+<footer class="site-footer" role="contentinfo" aria-label="Site footer">
+  <div class="footer-card" role="region" aria-label="Footer information">
+    <div class="footer-grid">
+      <!-- Left: brand + tagline -->
+      <div class="footer-brand">
+        <a class="footer-logo" href="index.html">SANTIANO</a>
+        <p class="footer-tagline">
+          A collection of projects and notes. Welcome — feel free to reach out via email.
+        </p>
+      </div>
+
+      <!-- General links -->
+      <nav class="footer-col">
+        <h4>General</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="education.html">Education</a></li>
+        </ul>
+      </nav>
+
+      <!-- More -->
+      <div class="footer-col">
+        <h4>More</h4>
+        <ul>
+          <li><a href="mailto:santianomelvin21@gmail.com">Email Me</a></li>
+          <li><a href="https://aayushbharti.in/blog" target="_blank">My Inspiration</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="footer-bottom">
+      <div class="left">
+        <span>© <span id="year"></span> Santiano. All rights reserved.</span>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms &amp; Conditions</a>
+      </div>
+
+      <div class="right">
+        <a href="https://github.com/melvinsantiano" target="_blank" aria-label="GitHub">
+          <img src="images/icons/githubs.png" alt="GitHub" class="footer-icon">
+        </a>
+        <a href="https://www.facebook.com/" target="_blank" aria-label="Facebook">
+          <img src="images/icons/facebook.png" alt="Facebook" class="footer-icon">
+        </a>
+      </div>
+    </div>
+
+  </div>
+</footer>
+<style>
+    :root{
+          --page-bg: #0d1923;  
+          --card-bg: #0d1923;  
+          --muted: #cccccc;    
+          --accent: #ffffff;   
+          --max-width: 1200px;
+        }
+        .site-footer {
+          max-width: var(--max-width);
+          margin: 0 auto;
+          padding: 30px 30px;
+          background: var(--card-bg);
+          margin-bottom: 40px;
+        }
+
+        .footer-card{
+          background: none;  
+          padding: 0;
+        }
+
+        .footer-grid{
+          display:grid;
+          grid-template-columns: 1fr repeat(2, minmax(160px,220px));
+          gap: 36px;
+          align-items:start;
+        }
+
+        .footer-brand{
+          display:flex;
+          flex-direction:column;
+          gap:14px;
+        }
+        .footer-logo {
+          text-decoration:none;
+          font-weight:700;
+          font-size:20px;
+          letter-spacing:3px;
+          text-transform:uppercase;
+          color: var(--accent);
+        }
+        .footer-tagline{
+          color:var(--muted);
+          font-size:14px;
+          line-height:1.5;
+          max-width: 420px;
+        }
+        .footer-col h4{
+          margin:0 0 16px 0;
+          font-size:16px;
+          font-weight:600;
+          color: var(--accent);
+        }
+        .footer-col ul{
+          list-style:none;
+          padding:0;
+          margin:0;
+          display:flex;
+          flex-direction:column;
+          gap:14px;
+        }
+        .footer-col a{
+          color:var(--muted);
+          text-decoration:none;
+          font-size:14px;
+          transition: color .18s, transform .12s;
+        }
+        .footer-col a:hover{
+          color:var(--accent);
+          transform: translateX(3px);
+        }
+        .footer-bottom{
+          display:flex;
+          align-items:center;
+          justify-content:space-between;
+          gap:16px;
+          margin-top:22px;
+          border-top: 1px solid rgba(255,255,255,0.1);
+          padding-top:18px;
+          color:var(--muted);
+          font-size:13px;
+        }
+        .footer-bottom .left{
+          display:flex;
+          gap:18px;
+          align-items:center;
+        }
+        .footer-bottom a{
+          color:var(--muted);
+          text-decoration:none;
+          font-size:13px;
+        }
+        .footer-bottom a:hover{
+          color:var(--accent);
+        }
+        .footer-bottom .right a {
+          margin-left: 15px;
+        }
+        .footer-bottom .footer-icon {
+          width: 22px; 
+          height: 22px;  
+          object-fit: contain;
+          transition: opacity 0.3s, transform 0.2s;
+        }
+        .footer-bottom .footer-icon:hover {
+          opacity: 0.7;
+          transform: scale(1.1);
+        }
+</style>
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+<script src="script.js"></script>
 </body>
 </html>

@@ -3,7 +3,7 @@ const title = document.getElementById('title');
 
 if (title) {
   const text = title.textContent;
-  title.textContent = ''; // Clear original text
+  title.textContent = ''; 
 
   text.split('').forEach((char, index) => {
     const span = document.createElement('span');

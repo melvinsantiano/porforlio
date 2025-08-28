@@ -1,4 +1,3 @@
-/* Base styling */
 body {
   margin: 0;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -20,18 +19,17 @@ body::before {
   left: 0; 
   right: 0; 
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);  /* adjust opacity for darkness */
-  z-index: -1;  /* keep behind content */
+  background: rgba(0, 0, 0, 0.5);
+  z-index: -1;  
 }
 
-/* Navbar */
 /* Navbar */
 header {
   position: fixed;
   top: 0;
   width: 100%;
-  background: transparent; /* fully see-through */
-  backdrop-filter: blur(8px); /* keep blur effect */
+  background: transparent; 
+  backdrop-filter: blur(8px); 
   -webkit-backdrop-filter: blur(8px);
   display: grid;
   grid-template-columns: 1fr auto 1fr;
@@ -43,9 +41,9 @@ header {
   border-bottom: none;
 }
 
-/* Title (always left) */
+
 header h1 {
-  grid-column: 1;          /* left column */
+  grid-column: 1;          
   justify-self: start;
   font-family: 'Montserrat', sans-serif;
   font-size: 33px;
@@ -64,31 +62,29 @@ nav {
   gap: 1.5rem;
 }
 
-/* Links with pill shape */
 nav a {
   text-decoration: none;
   font-size: 15px;
   color: #ffffff;
   padding: 6px 14px;
-  border-radius: 20px; /* pill/circle effect */
-  background: rgba(255, 255, 255, 0.1); /* transparent but visible */
+  border-radius: 20px; 
+  background: rgba(255, 255, 255, 0.1); 
   transition: background 0.3s, color 0.3s;
 }
 
 nav a:hover {
-  background: rgba(255, 255, 255, 0.2); /* brighter on hover */
+  background: rgba(255, 255, 255, 0.2); 
   color: #ffd700;
 }
 
 /* Active page indicator */
 nav a.active {
-  border-top: 2px solid #ffffff; /* white line above */
-  background: rgba(255, 255, 255, 0.15); /* slightly stronger background */
+  border-top: 2px solid #ffffff; 
+  background: rgba(255, 255, 255, 0.15); 
 }
 
 
 
-/* Placeholder (right column) keeps nav perfectly centered */
 header::after {
   content: "";
   flex: 1;
@@ -102,7 +98,7 @@ section {
 }
 
 section h2 {
-  font-size: 28px; /* smaller for better fit on small screens */
+  font-size: 28px; 
   margin-bottom: 20px;
   color: #ffffff;
 }
@@ -115,21 +111,20 @@ section p {
   font-size: 16px;
 }
 
-/* Fix content hiding under navbar */
+
 #about, #projects, #education, #info {
   padding-top: 110px;
 }
 
-/* About container layout: left text, right gallery */
 /* Container: left text, right gallery */
 .about-container {
   display: flex;
-  align-items: center; /* vertical alignment of gallery */
+  align-items: center; 
   justify-content: space-between;
   gap: 40px;
   max-width: 1000px;
   margin: auto;
-  padding: 15px 20px; /* reduced top padding to move content higher */
+  padding: 15px 20px; 
   flex-wrap: wrap;
 }
 
@@ -147,15 +142,15 @@ section p {
 .sub-title {
   font-size: 16px;
   color: gray;
-  margin-bottom: -5px; /* was 10px, make it smaller */
+  margin-bottom: -5px; 
   text-transform: uppercase;
   letter-spacing: 2px;
 }
 
 /* Main title */
 .main-title {
-  font-size: 32px; /* bigger */
-  line-height: 1.2; /* normal spacing */
+  font-size: 32px; 
+  line-height: 1.2; 
   margin-bottom: -68px;
 }
 
@@ -170,19 +165,19 @@ section p {
   -webkit-text-fill-color: transparent;
   animation: gradientShift 4s ease infinite;
   margin-bottom: 1px;
-  line-height: 1; /* was tighter before, make it normal so not too far */
+  line-height: 1; 
 }
 
 .highlight .tabbed {
   display: inline-block;
-  margin-left: 40px; /* keep indentation */
+  margin-left: 40px; 
 }
 
 
 /* Paragraphs */
 .about-description {
-  font-size: 18px; /* bigger */
-  line-height: 2; /* double spacing only for paragraphs */
+  font-size: 18px; 
+  line-height: 2; 
   margin-bottom: 15px;
   color: #eaeaea;
 }
@@ -200,13 +195,13 @@ section p {
   flex: 1;
   min-width: 300px;
   max-width: 400px;
-  height: 540px; /* taller rectangle */
+  height: 540px; 
   position: relative;
   perspective: 1000px;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* vertically center slides */
-  margin-left: 20px; /* move gallery slightly to the right */
+  justify-content: center; 
+  margin-left: 20px; 
 }
 
 .gallery-window {
@@ -214,21 +209,21 @@ section p {
   height: 100%;
   position: relative;
   border-radius: 20px;
-  overflow: visible; /* allow slight peek */
+  overflow: visible; 
 }
 
 /* Slides */
 .gallery-slide {
   position: absolute;
   top: 0;
-  width: 90%;        /* slightly smaller than full width */
-  height: 100%;      /* full height of gallery (taller) */
+  width: 90%;       
+  height: 100%;     
   object-fit: cover;
   border-radius: 20px;
   transition: transform 1s ease, opacity 1s ease;
   z-index: 1;
   opacity: 0;
-  left: 5%;          /* center active slide */
+  left: 5%;          
 }
 
 /* Active slide */
@@ -260,7 +255,7 @@ section p {
   font-size: 18px;
   color: #ffd700;
   position: relative;
-  z-index: 20; /* stays above slides */
+  z-index: 20; 
 }
 
 
@@ -268,7 +263,7 @@ section p {
   display: flex;
   gap: 20px;
   justify-content: flex-start;
-  margin-top: auto; /* push to bottom of the text block */
+  margin-top: auto; 
 }
 
 .social-icons a img {
@@ -284,10 +279,9 @@ section p {
 
 
 
-/* Experience Section */
 .experience-section {
   text-align: center;
-  margin-top: 50px; /* space from intro */
+  margin-top: 50px; 
   padding: 40px 20px;
 }
 
@@ -300,17 +294,17 @@ section p {
 }
 
 .experience-title {
-  font-size: 40px; /* bigger */
+  font-size: 40px; 
   font-weight: 700;
   color: #eaeaea;
-  line-height: 1.2; /* closer spacing between lines */
+  line-height: 1.2;
 }
 
 .experience-highlight {
-  display: block; /* forces it to its own line */
+  display: block;
   font-family: 'Montserrat', sans-serif;
   font-weight: 900;
-  font-size: 60px; /* slightly bigger than top line */
+  font-size: 60px; 
   background: linear-gradient(90deg, #ff6b6b, #f7d794, #6a89cc, #78e08f);
   background-size: 300% 300%;
   -webkit-background-clip: text;
@@ -329,7 +323,7 @@ section p {
   gap: 120px;
 }
 
-/* Hollow timeline line */
+/* timeline line */
 .timeline-line {
   position: absolute;
   left: 30%;
@@ -353,19 +347,18 @@ section p {
   z-index: 2;
 }
 
-/* Moving ball centered on line */
-/* Moving ball with image */
+/* Circle with image */
 .timeline-ball {
   position: absolute;
-  left: 30%; /* center on line */
+  left: 30%;
   transform: translateX(-50%);
-  width: 30px;   /* smaller width */
-  height: 30px;  /* smaller height */
+  width: 30px;   
+  height: 30px; 
   border-radius: 50%;
   border: 2px solid #fff;
-  background: #1a1a1a; /* fallback color if image fails */
+  background: #1a1a1a; 
   z-index: 3;
-  overflow: hidden; /* make sure image stays inside circle */
+  overflow: hidden; 
 }
 
 /* Image inside the circle */
@@ -385,9 +378,9 @@ section p {
 
 /* Left side: date + company */
 .timeline-left {
-  width: 30%; /* left side */
+  width: 30%;
   text-align: right;
-  padding-right: 40px; /* space from line */
+  padding-right: 40px; 
   box-sizing: border-box;
   color: #eaeaea;
 }
@@ -395,7 +388,7 @@ section p {
 /* Right side: content/work done */
 .timeline-right {
   width: 70%; 
-  padding-left: 250px; /* increase space from line */
+  padding-left: 250px; 
   color: #eaeaea;
   text-align: left; 
 }
@@ -443,16 +436,16 @@ section p {
 
 /* 🔧 Tools Box Background */
 .tools-box {
-  background-image: url('images/about/fbox_bg.jpg'); /* 🔁 Replace with your image URL */
+  background-image: url('images/about/fbox_bg.jpg'); 
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  color: white; /* Optional: makes text readable on dark backgrounds */
+  color: white; 
 }
 
 /* 🎵 Spotify & Website Box Background */
 .hobby-box:nth-child(2) {
-  background-image: url('images/about/sbox_bg.jpg'); /* 🔁 Replace with your image URL */
+  background-image: url('images/about/sbox_bg.jpg'); 
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -461,7 +454,7 @@ section p {
 
 /* 🚀 Projects Box Background */
 .hobby-box:nth-child(3) {
-  background-image: url('images/about/tbox_bg.jpg'); /* 🔁 Replace with your image URL */
+  background-image: url('images/about/tbox_bg.jpg'); 
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -508,7 +501,7 @@ section p {
   transform: scale(1.1);
 }
 
-/* Optional: label under each icon */
+/* label under each icon */
 .tool-icon::after {
   content: attr(title);
   position: absolute;
@@ -553,15 +546,13 @@ section p {
   /* Track */
   .carousel-track {
     display: flex;
-    gap: 20px;              /* <-- keep in sync with JS GAP if you change */
+    gap: 20px;              
     will-change: transform;
     transform: translate3d(0,0,0);
-    /* IMPORTANT: no transition — animation handled in JS for smooth loop */
-  }
+    
 
-  /* Cards (your styles, kept) */
   .card {
-    flex: 0 0 300px;        /* fixed width card */
+    flex: 0 0 300px;        
     height: 300px;
     background: #1e1e2f;
     border: 2px solid #6a89cc;
@@ -596,7 +587,7 @@ section p {
 .card img {
   width: 100%;
   height: 80%;
-  object-fit: cover;   /* ensures it fills without stretching */
+  object-fit: cover;  
   border-radius: 8px;
   margin-bottom: 10px;
 }
@@ -606,3 +597,19 @@ section p {
   font-weight: bold;
   text-align: center;
 }
+
+
+/* games carousel */
+  .games-carousel {
+    position: relative;
+    overflow: hidden;
+  }
+
+/* web carousel */
+    .websites-carousel {
+      position: relative;
+      overflow: hidden;
+    }
+
+
+/* footer */
